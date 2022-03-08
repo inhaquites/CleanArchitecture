@@ -1,0 +1,46 @@
+FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine AS build
+LABEL version:"1.0" description="api clean architecture" maintainer:"inhaquites"
+WORKDIR /app
+#
+# copy csproj and restore as distinct layers
+COPY *.sln .
+COPY ./CleanArchMVC.API/*.csproj ./CleanArchMVC.API/
+COPY ./CleanArchMVC.Application/*.csproj ./CleanArchMVC.Application/
+COPY ./CleanArchMVC.Domain/*.csproj ./CleanArchMVC.Domain/
+COPY ./CleanArchMVC.Infra.Data/*.csproj ./CleanArchMVC.Infra.Data/
+COPY ./CleanArchMVC.Domain.Tests/*.csproj ./CleanArchMVC.Domain.Tests/
+COPY ./CleanArchMVC.Infra.IoC/*.csproj ./CleanArchMVC.Infra.IoC/
+COPY ./CleanArchMVC.WebUI/*.csproj ./CleanArchMVC.WebUI/
+#
+RUN dotnet restore ./CleanArchMVC.WebUI/*.csproj
+#
+# copy everything else and build app
+COPY ./CleanArchMVC.API/. ./CleanArchMVC.API/
+COPY ./CleanArchMVC.Application/ ./CleanArchMVC.Application/
+COPY ./CleanArchMVC.Domain/. ./CleanArchMVC.Domain/
+COPY ./CleanArchMVC.Infra.Data/. ./CleanArchMVC.Infra.Data/
+COPY ./CleanArchMVC.Domain.Tests/. ./CleanArchMVC.Domain.Tests/
+COPY ./CleanArchMVC.Infra.IoC/. ./CleanArchMVC.Infra.IoC/
+COPY ./CleanArchMVC.WebUI/. ./CleanArchMVC.WebUI/
+#
+WORKDIR /app/CleanArchMVC.WebUI
+RUN dotnet publish -c Release -o out
+#
+FROM mcr.microsoft.com/dotnet/aspnet:5.0-alpine AS runtime
+#ARG INHAQUITES_ENVIRONMENT=Development
+WORKDIR /app
+#
+#ENV ASPNETCORE_URLS="http://+:443;http://+:80"
+EXPOSE 80
+#EXPOSE 443
+
+#
+RUN apk add --no-cache icu-libs
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+#ENV ASPNETCORE_ENVIRONMENT=$INHAQUITES_ENVIRONMENT
+#
+COPY --from=build /app/CleanArchMVC.WebUI/out .
+ENTRYPOINT ["dotnet", "CleanArchMVC.WebUI.dll"]
+
+###depois de pronto o arquivo Dockerfile 
+###rodar o comando: docker build -t inhaquites/cleanarchapi:1.0 .

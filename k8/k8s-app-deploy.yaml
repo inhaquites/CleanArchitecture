@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-deployment
+  labels:
+    app: products-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: products-app
+  template:
+    metadata:
+      labels:
+        app: products-app
+    spec:
+      containers:
+        - name: productsapp
+          image: inhaquites/cleanarchweb:1.11
+          resources:          
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80  
+          env:
+            - name: ConnectionStrings__DefaultConnection
+              valueFrom:
+                secretKeyRef:
+                  name: cleanarch-secrets
+                  key: DefaultConnection
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: products-app-service
+spec:
+  selector:
+    app: products-app
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 8084
+      targetPort: 80                  

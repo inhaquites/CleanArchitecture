@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-service
+spec:
+  selector:
+    app: database
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 1402
+      targetPort: 1433

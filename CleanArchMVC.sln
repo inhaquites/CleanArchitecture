@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31727.386
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchMVC.Domain", "CleanArchMVC.Domain\CleanArchMVC.Domain.csproj", "{38A8D2F9-3E19-47B6-8479-3E6DC3B36BE9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchMVC.Application", "CleanArchMVC.Application\CleanArchMVC.Application.csproj", "{B6D5AA3A-BC13-4CFE-9208-55EF360A0943}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchMVC.Infra.Data", "CleanArchMVC.Infra.Data\CleanArchMVC.Infra.Data.csproj", "{2B43A0DD-6C4B-470F-AF1E-3218B4C264ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchMVC.Infra.IoC", "CleanArchMVC.Infra.IoC\CleanArchMVC.Infra.IoC.csproj", "{1DE08D3D-A11B-439C-8C5C-2D7E480AC23D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchMVC.WebUI", "CleanArchMVC.WebUI\CleanArchMVC.WebUI.csproj", "{A82AFE7B-3581-4C11-BE92-B1FE1468519F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2E1B923E-6C1D-4AC0-8F7D-6DD25A87B607}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchMVC.Domain.Tests", "CleanArchMVC.Domain.Tests\CleanArchMVC.Domain.Tests.csproj", "{451687CC-ECAF-46FB-AF25-7D2826B5E522}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchMVC.API", "CleanArchMVC.API\CleanArchMVC.API.csproj", "{5CF8D714-DCB0-4B22-9A64-585D10FA1BD9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8", "k8", "{A7681EF3-14C4-400A-BDF0-09F5CE8F7AA7}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		Dockerfile.api = Dockerfile.api
+		Dockerfile.web = Dockerfile.web
+		k8\k8s-api-deployment.yaml = k8\k8s-api-deployment.yaml
+		k8\k8s-api-hpa.yaml = k8\k8s-api-hpa.yaml
+		k8\k8s-api-service.yaml = k8\k8s-api-service.yaml
+		k8\k8s-app-deploy.yaml = k8\k8s-app-deploy.yaml
+		k8\k8s-db-deployment.yaml = k8\k8s-db-deployment.yaml
+		k8\k8s-db-service.yaml = k8\k8s-db-service.yaml
+		k8\namespace.yaml = k8\namespace.yaml
+		k8\secrets.yaml = k8\secrets.yaml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{38A8D2F9-3E19-47B6-8479-3E6DC3B36BE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38A8D2F9-3E19-47B6-8479-3E6DC3B36BE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38A8D2F9-3E19-47B6-8479-3E6DC3B36BE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38A8D2F9-3E19-47B6-8479-3E6DC3B36BE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6D5AA3A-BC13-4CFE-9208-55EF360A0943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6D5AA3A-BC13-4CFE-9208-55EF360A0943}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6D5AA3A-BC13-4CFE-9208-55EF360A0943}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6D5AA3A-BC13-4CFE-9208-55EF360A0943}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B43A0DD-6C4B-470F-AF1E-3218B4C264ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B43A0DD-6C4B-470F-AF1E-3218B4C264ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B43A0DD-6C4B-470F-AF1E-3218B4C264ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B43A0DD-6C4B-470F-AF1E-3218B4C264ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DE08D3D-A11B-439C-8C5C-2D7E480AC23D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DE08D3D-A11B-439C-8C5C-2D7E480AC23D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DE08D3D-A11B-439C-8C5C-2D7E480AC23D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DE08D3D-A11B-439C-8C5C-2D7E480AC23D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A82AFE7B-3581-4C11-BE92-B1FE1468519F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A82AFE7B-3581-4C11-BE92-B1FE1468519F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A82AFE7B-3581-4C11-BE92-B1FE1468519F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A82AFE7B-3581-4C11-BE92-B1FE1468519F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{451687CC-ECAF-46FB-AF25-7D2826B5E522}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{451687CC-ECAF-46FB-AF25-7D2826B5E522}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{451687CC-ECAF-46FB-AF25-7D2826B5E522}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{451687CC-ECAF-46FB-AF25-7D2826B5E522}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CF8D714-DCB0-4B22-9A64-585D10FA1BD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CF8D714-DCB0-4B22-9A64-585D10FA1BD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CF8D714-DCB0-4B22-9A64-585D10FA1BD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CF8D714-DCB0-4B22-9A64-585D10FA1BD9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{451687CC-ECAF-46FB-AF25-7D2826B5E522} = {2E1B923E-6C1D-4AC0-8F7D-6DD25A87B607}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {79728EDB-39D3-4484-AF62-3D0275849F0F}
+	EndGlobalSection
+EndGlobal

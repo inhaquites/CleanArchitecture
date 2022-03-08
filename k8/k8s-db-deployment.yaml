@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-deployment
+  labels:
+    app: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database
+  template:
+    metadata:
+      labels:
+        app: database    
+    spec:
+      containers:
+        - name: cleanarchdb
+          image: inhaquites/sqlserver:2019.1
+          ports:
+          - containerPort: 1433
+
+
+      # containers:
+      #   - name: orderdb
+      #     image: inhaquites/sqlserver:2019.1
+      #     resources:
+      #       limits:
+      #         memory: "128Mi"
+      #         cpu: "500m"
+      #     ports:
+      #     - containerPort: 1433

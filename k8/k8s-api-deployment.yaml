@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+  # namespace: clean-architecture
+  labels:
+    app: products-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: products-api
+  template:
+    metadata:
+      labels:
+        app: products-api    
+    spec:
+      containers:
+        - name: productsapi
+          image: inhaquites/cleanarchapi:1.37
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
+          # metrics:
+          #   port: 80
+          env:
+            - name: ConnectionStrings__DefaultConnection
+              valueFrom:
+                secretKeyRef:
+                  name: cleanarch-secrets
+                  key: DefaultConnection
+# hpa:
+#   enabled: true
+#   minReplicas: 1
+#   maxReplicas: 3
+#   metrics:
+#     - type: Resource
+#       resource:
+#         name: cpu
+#         targetAverageUtilization: 80                  
+
+# serviceMonitor:
+#   enabled: true
+#   path: "/metrics"
