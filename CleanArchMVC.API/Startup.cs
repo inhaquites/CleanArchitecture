@@ -32,28 +32,13 @@ namespace CleanArchMVC.API
             //ativar autenticacao e validar o token
             services.AddInfrastructureJWT(Configuration);
 
-            //cors
-            //services.AddCors();
-            //services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
-            //{
-            //    builder.WithOrigins("http://example.com",
-            //                        "http://exemplo.com")
-            //           .AllowAnyMethod()
-            //           .AllowAnyHeader();
-            //}));
-            services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(
-                    builder => builder.WithOrigins("https://localhost:2000"));
-                options.AddPolicy("MyPolicy", builder => 
-                    builder.WithOrigins("https://localhost:2001"));
-              }  );
+            //configuracao CORS
+            services.AddInfrastructureCORS();
 
             services.AddStackExchangeRedisCache(options =>
-                {
-                    options.Configuration = "localhost:6379";
-                }
-            );
+            {
+                options.Configuration = "localhost:6379";
+            });
 
             services.AddHealthChecks();
 
@@ -61,30 +46,17 @@ namespace CleanArchMVC.API
 
             //configuracao swagger
             services.AddInfrastructureSwagger();
-
-            services.AddHealthChecks()
-                .AddSqlServer(
-                    connectionString: Configuration.GetConnectionString("DefaultConnection"),
-                    healthQuery: "SELECT 1;",
-                    name: "sqlserver",
-                    failureStatus: HealthStatus.Degraded,
-                    tags: new string[] { "db", "data", "sqlserver" })
-                .AddRedis(
-                    "localhost:6379",
-                    name: "redis", 
-                    tags: new string[] {"db","cache", "redis" } );
-            //services.AddHealthChecksUI()
-            //    .AddInMemoryStorage();
+            
+            //configuracao HealthCheck
+            services.AddInfrastructureHealthCheck(Configuration);
+            
             services.AddHealthChecksUI(setupSettings: setup =>
-            {
-                
+            {                
                 setup.SetEvaluationTimeInSeconds(5);
-            }).AddInMemoryStorage();
-                
-
+            }).AddInMemoryStorage();            
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
