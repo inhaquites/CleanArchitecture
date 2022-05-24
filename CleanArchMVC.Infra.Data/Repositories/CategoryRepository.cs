@@ -15,7 +15,6 @@ namespace CleanArchMVC.Infra.Data.Repositories
         {
             _categoryContext = context;
         }
-
         public async Task<Category> CreateAsync(Category category)
         {
             using (var dbTrans = _categoryContext.Database.BeginTransaction(System.Data.IsolationLevel.ReadCommitted))
