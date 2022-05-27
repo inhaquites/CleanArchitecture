@@ -1,5 +1,6 @@
 using CleanArchMVC.Infra.IoC;
 using HealthChecks.UI.Client;
+using Logzio.DotNet.NLog;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
+using NLog;
+using NLog.Config;
 using System;
 using System.Linq;
 using System.Net.Mime;
@@ -43,6 +46,25 @@ namespace CleanArchMVC.API
             services.AddHealthChecks();
 
             services.AddControllers();
+
+            //Logz
+            var config = new LoggingConfiguration();
+            var logzioTarget = new LogzioTarget
+            {
+                Name = "Logzio",
+                Token = "cldMhKQFMbFeyPJRKTXPRDxdtMeDJhPi",
+                LogzioType = "nlog",
+                ListenerUrl = "https://listener.logz.io:8071",
+                BufferSize = 100,
+                BufferTimeout = TimeSpan.Parse("00:00:05"),
+                RetriesMaxAttempts = 3,
+                RetriesInterval = TimeSpan.Parse("00:00:02"),
+                Debug = false,
+            };
+            config.AddRule(LogLevel.Debug, LogLevel.Fatal, logzioTarget);
+            LogManager.Configuration = config;
+
+
 
             //configuracao swagger
             services.AddInfrastructureSwagger();
